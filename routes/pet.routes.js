@@ -44,5 +44,15 @@ router.put('/edit', async(req, res, next)=>{
     }
 });
 
-
+router.delete('/:id', async(req, res, next)=>{
+    try{
+        const id = req.params.id;
+        // No es necesario asignar resultado a una variable
+        //puesto que el doc sera eliminado
+        await Pet.findByIdAndDelete(id);
+        return res.status(200).json("Pet deleted!");
+    } catch(err){
+        next(err);
+    }
+});
 module.exports = router;
